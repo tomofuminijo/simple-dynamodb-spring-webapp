@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script>
+        
+        function greeting() {
+            let name = document.getElementById("name").value;
+            if(name || name != "") {
+                location.href='/greeting?name=' + name;
+            } else {
+                location.href='/greeting';
+            }
+        }
+    </script>
+</head>
+<body>
+    <p><h1></h1>Get your greeting</h1></p>
+    <input type="text" id="name" />
+    <input type="button" value="greeting" onClick="greeting()" />
+</body>
+</html>
