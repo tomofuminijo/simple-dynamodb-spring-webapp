@@ -8,11 +8,16 @@ import org.springframework.util.StringUtils;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.handlers.TracingHandler;
+
 
 @Configuration
 @EnableDynamoDBRepositories(basePackages = "hello.repositories")
@@ -28,11 +33,12 @@ public class DynamoDBConfig {
     
 	@Bean
 	public AmazonDynamoDB amazonDynamoDB() {
-		
+
 		AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
             .withCredentials(amazonAWSCredentials())
 			.withEndpointConfiguration(
 			new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint, amazonDynamoDBRegion))
+			.withRequestHandlers(new TracingHandler(AWSXRay.getGlobalRecorder()))
 			.build();
 
 /*		
@@ -41,6 +47,7 @@ public class DynamoDBConfig {
 			amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
 		}
 */
+
 		return amazonDynamoDB;
 	}
 
