@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.repository.CrudRepository;
 
-import hello.model.User;
+import hello.model.Greeting;
 
 @EnableScan
-public interface UserRepository extends CrudRepository<User, String> {
+public interface GreetingRepository extends CrudRepository<Greeting, String> {
 }
