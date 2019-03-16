@@ -34,6 +34,7 @@ public class DynamoDBConfig {
 	@Bean
 	public AmazonDynamoDB amazonDynamoDB() {
 
+		System.out.println("---- DynamoDB Endpoint: " + amazonDynamoDBEndpoint);
 		AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
             .withCredentials(amazonAWSCredentials())
 			.withEndpointConfiguration(

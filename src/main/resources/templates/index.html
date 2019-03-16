@@ -6,9 +6,9 @@
     <script>
         
         function greeting() {
-            let id = document.getElementById("id").value;
-            if(id || id != "") {
-                location.href='/greeting?id=' + id;
+            let lang = document.getElementById("lang").value;
+            if(lang || lang != "") {
+                location.href='/greeting?lang=' + lang;
             } else {
                 location.href='/greeting';
             }
@@ -16,8 +16,13 @@
     </script>
 </head>
 <body>
-    <p><h1></h1>Get your greeting</h1></p>
-    <input type="text" id="id" />
-    <input type="button" value="greeting" onClick="greeting()" />
+    <p>
+        <h1></h1>Get your greeting</h1>
+        <input type="text" id="lang" />
+        <input type="button" value="greeting" onClick="greeting()" />
+    </P>
+    <p>
+        <a href="/init">init</a>
+    </p>
 </body>
 </html>
