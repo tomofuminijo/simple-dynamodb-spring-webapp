@@ -145,7 +145,7 @@ docker run -p 8000:8000 amazon/dynamodb-local
 ```
 amazon:
   dynamodb:
-    local: false
+    local: true
     endpoint: http://localhost:8000
     region: us-east-1
   credential:
