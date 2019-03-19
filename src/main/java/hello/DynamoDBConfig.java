@@ -53,6 +53,7 @@ public class DynamoDBConfig {
 		} else {
 			amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
 	            .withCredentials(amazonAWSCredentials())
+				.withRequestHandlers(new TracingHandler(AWSXRay.getGlobalRecorder()))
 				.build();
 		}
 
