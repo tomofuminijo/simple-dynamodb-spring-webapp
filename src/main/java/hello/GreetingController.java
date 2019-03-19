@@ -49,6 +49,7 @@ public class GreetingController {
         Greeting greeting = greetingRepository.findById(lang).get();
         model.addAttribute("hello", greeting.getHello());
         model.addAttribute("lang", lang);
+        model.addAttribute("langname", greeting.getLangname());
         return "greeting";
     }
 
@@ -78,14 +79,14 @@ public class GreetingController {
         System.out.println("Table Description: " + tableDescription);
 
 	    
-		greetingRepository.save(new Greeting("en", "Hello"));
-		greetingRepository.save(new Greeting("ja", "こんにちは"));
-		greetingRepository.save(new Greeting("zh", "您好"));
-		greetingRepository.save(new Greeting("ko", "여보세요"));
-		greetingRepository.save(new Greeting("el", "Saluton"));
-		greetingRepository.save(new Greeting("it", "Ciao"));
-		greetingRepository.save(new Greeting("de", "Hallo"));
-		greetingRepository.save(new Greeting("fr", "Bonjour"));
+		greetingRepository.save(new Greeting("en", "Hello", "English"));
+		greetingRepository.save(new Greeting("ja", "こんにちは", "Japanese"));
+		greetingRepository.save(new Greeting("zh", "您好", "Chinese"));
+		greetingRepository.save(new Greeting("ko", "여보세요", "Korean"));
+		greetingRepository.save(new Greeting("el", "Saluton", "Greek"));
+		greetingRepository.save(new Greeting("it", "Ciao", "Italian"));
+		greetingRepository.save(new Greeting("de", "Hallo", "German"));
+		greetingRepository.save(new Greeting("fr", "Bonjour", "French"));
 		return "index";
 	}
 

@@ -10,13 +10,15 @@ public class Greeting {
 
 	private String lang;
 	private String hello;
+	private String langname;
 
 	public Greeting() {
 	}
 
-	public Greeting(String lang, String hello) {
+	public Greeting(String lang, String hello, String langname) {
 		this.lang = lang;
 		this.hello = hello;
+		this.langname = langname;
 	}
 
 	@DynamoDBHashKey
@@ -29,6 +31,11 @@ public class Greeting {
 		return hello;
 	}
 
+	@DynamoDBAttribute
+	public String getLangname() {
+		return langname;
+	}
+
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
@@ -37,4 +44,7 @@ public class Greeting {
 		this.hello = hello;
 	}
 
+	public void setLangname(String langname) {
+		this.langname = langname;
+	}
 }
