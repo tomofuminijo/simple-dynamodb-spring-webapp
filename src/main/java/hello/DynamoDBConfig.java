@@ -22,6 +22,9 @@ import com.amazonaws.xray.handlers.TracingHandler;
 @Configuration
 @EnableDynamoDBRepositories(basePackages = "hello.repositories")
 public class DynamoDBConfig {
+    @Value("${amazon.dynamodb.local}")
+	private boolean amazonDynamoDBLocal;
+
     @Value("${amazon.dynamodb.endpoint}")
 	private String amazonDynamoDBEndpoint;
 	
@@ -34,20 +37,24 @@ public class DynamoDBConfig {
 	@Bean
 	public AmazonDynamoDB amazonDynamoDB() {
 
-		System.out.println("---- DynamoDB Endpoint: " + amazonDynamoDBEndpoint);
-		AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
-            .withCredentials(amazonAWSCredentials())
-			.withEndpointConfiguration(
-			new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint, amazonDynamoDBRegion))
-			.withRequestHandlers(new TracingHandler(AWSXRay.getGlobalRecorder()))
-			.build();
+		AmazonDynamoDB amazonDynamoDB  = null;
+		System.out.println("---DyanmoDB Local enabled?: "+ amazonDynamoDBLocal);
+		
+		if (amazonDynamoDBLocal) {
+			System.out.println("---DyanmoDB Local Endpoint: "+ amazonDynamoDBEndpoint);
 
-/*		
-		AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAWSCredentials());
-		if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
-			amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
+			amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
+	            .withCredentials(amazonAWSCredentials())
+				.withEndpointConfiguration(
+				new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint, amazonDynamoDBRegion))
+				.withRequestHandlers(new TracingHandler(AWSXRay.getGlobalRecorder()))
+				.build();
+
+		} else {
+			amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
+	            .withCredentials(amazonAWSCredentials())
+				.build();
 		}
-*/
 
 		return amazonDynamoDB;
 	}

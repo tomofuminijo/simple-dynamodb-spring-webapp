@@ -1,7 +1,7 @@
 amazon:
   dynamodb:
-#    endpoint: http://localhost:8000
-    endpoint: https://dynamodb.us-east-1.amazonaws.com
+    local: false
+    endpoint: http://localhost:8000
     region: us-east-1
   credential:
     profile: default
