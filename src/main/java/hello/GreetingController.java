@@ -83,7 +83,7 @@ public class GreetingController {
 		greetingRepository.save(new Greeting("ja", "こんにちは", "Japanese"));
 		greetingRepository.save(new Greeting("zh", "您好", "Chinese"));
 		greetingRepository.save(new Greeting("ko", "여보세요", "Korean"));
-		greetingRepository.save(new Greeting("el", "Saluton", "Greek"));
+		greetingRepository.save(new Greeting("el", "Χαίρετε", "Greek"));
 		greetingRepository.save(new Greeting("it", "Ciao", "Italian"));
 		greetingRepository.save(new Greeting("de", "Hallo", "German"));
 		greetingRepository.save(new Greeting("fr", "Bonjour", "French"));
