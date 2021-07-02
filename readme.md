@@ -8,22 +8,14 @@ AWS X-Ray との連携や DynamoDB Local を利用した完全ローカル環境
 以下、Cloud9 上で動作させる手順です。基本的にはどの環境でも動かせます。（OpenJDK 8 およびMaven があれば良いです。）
 
 
-# Step1 JDK 8 のインストール
-ここでは、[Amazon Corretto (Java8)](https://aws.amazon.com/jp/corretto/)　をインストールします。   
+# Step1 JDK 11 のインストール
+ここでは、[Amazon Corretto 11](https://aws.amazon.com/jp/corretto/)　をインストールします。   
 まず、Cloud9 上でターミナルウィンドウを開き、以下のコマンドを実行します。
 
 ```
-wget https://d2znqt9b1bc64u.cloudfront.net/java-1.8.0-amazon-corretto-devel-1.8.0_202.b08-2.x86_64.rpm
+wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.rpm
 
-sudo yum install -y java-1.8.0-amazon-corretto-devel-1.8.0_202.b08-2.x86_64.rpm
-```
-
-JAVA_HOME 環境変数を設定しておきます。
-
-```
-echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto/" >> ~/.bash_profile
-
-source ~/.bash_profile
+sudo rpm -ihv /home/ec2-user/environment/amazon-corretto-11-x64-linux-jdk.rpm
 ```
 
 # Step2: Maven のインストール
@@ -49,7 +41,7 @@ sudo yum install -y apache-maven
 
 - アプリケーション実行
   ```
-  java -jar target/my-greeting-web-0.1.0.jar
+  java -jar target/my-greeting-web-1.0.0.jar
   ```
 
 - ブラウザからアクセス   
@@ -111,7 +103,7 @@ com.amazonaws.SdkClientException: Unable to execute HTTP request: Connect to 127
 
 - X-Ray の動作確認
 
-一旦Java プロセスを終了してサイド起動してください。先ほどと同じようにアプリにアクセスしてもException は発生しません。また　xray デーモンのコンソール上に以下のような情報が表示されます。
+一旦Java プロセスを終了して再度起動してください。先ほどと同じようにアプリにアクセスしてもException は発生しません。また　xray デーモンのコンソール上に以下のような情報が表示されます。
 
 ```
 2019-03-19T12:43:23Z [Info] Successfully sent batch of 2 segments (0.027 seconds
